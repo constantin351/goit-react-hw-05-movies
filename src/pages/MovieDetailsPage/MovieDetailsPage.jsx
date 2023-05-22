@@ -9,7 +9,7 @@ const MovieDetailsPage = () => {
   // console.log('id', id);
 
   const [movieDetails, setMovieDetails] = useState(null);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchMovieDetails();
@@ -25,7 +25,8 @@ const MovieDetailsPage = () => {
         // console.log('movieDetailsObj', movieDetailsObj);
         setMovieDetails(movieDetailsObj);
       } catch (error) {
-        setError(error);
+        // setError(error);
+        console.log('error', error);
       }
     }
   }, [id]);

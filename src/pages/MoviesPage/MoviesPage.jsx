@@ -5,11 +5,10 @@ import { MoviesList } from 'components/MoviesList/MoviesList';
 
 const MoviesPage = () => {
   const [moviesFound, setMoviesFound] = useState(null);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
-  //
   //
   useEffect(() => {
     if (query === '' || query === null) return;
@@ -23,7 +22,8 @@ const MoviesPage = () => {
         console.log('moviesArr', moviesArr);
         setMoviesFound(moviesArr);
       } catch (error) {
-        setError(error);
+        // setError(error);
+        console.log('error', error);
       }
     }
   }, [query]);

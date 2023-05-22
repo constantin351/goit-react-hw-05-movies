@@ -5,7 +5,7 @@ import { MoviesList } from 'components/MoviesList/MoviesList';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchMovies();
@@ -16,7 +16,8 @@ const HomePage = () => {
         const moviesArr = result.data.results;
         setMovies(moviesArr);
       } catch (error) {
-        setError(error);
+        // setError(error);
+        console.log('error', error);
       }
     }
   }, []);
