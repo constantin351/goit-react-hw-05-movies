@@ -1,0 +1,13 @@
+.item {
+  margin: 7px 0;
+  color: black;
+}
+
+.item_link {
+  color: blue;
+  font-weight: 500;
+}
+
+.item_link:hover {
+  color: orangered;
+}
