@@ -1,18 +1,35 @@
-import { MoviesItem } from 'components/MoviesItem/MoviesItem';
+import PropTypes from 'prop-types';
+import MoviesItem from 'components/MoviesItem/MoviesItem';
 import css from './MoviesList.module.css';
+import { useLocation } from 'react-router-dom';
 
-export const MoviesList = ({ movies }) => {
+const MoviesList = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <main>
-      <h1 className={css.title}>Trending today</h1>
+      
+      {location.pathname === '/' && (
+        <h1 className={css.title}>Trending today</h1>
+      )}
+
       <ul>
         {movies.map(movie => (
-          // <li key={movie.id}>
-          //   <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-          // </li>
           <MoviesItem key={movie.id} id={movie.id} name={movie.title} />
         ))}
       </ul>
+      
     </main>
   );
 };
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+export default MoviesList;

@@ -1,0 +1,18 @@
+.reviewsList {
+  margin-top: 20px;
+}
+
+.reviewsList_item {
+  border: dashed 1px black;
+  margin-bottom: 18px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.reviewsList_title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.reviewsList_text {
+}

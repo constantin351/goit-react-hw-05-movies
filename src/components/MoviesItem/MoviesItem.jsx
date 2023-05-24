@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import css from './MoviesItem.module.css';
 
-export const MoviesItem = ({ id, name }) => {
+const MoviesItem = ({ id, name }) => {
   const location = useLocation();
 
   return (
@@ -16,3 +17,10 @@ export const MoviesItem = ({ id, name }) => {
     </li>
   );
 };
+
+MoviesItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+};
+
+export default MoviesItem;

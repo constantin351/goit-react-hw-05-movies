@@ -1,17 +1,27 @@
+import PropTypes from 'prop-types';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { BackLink } from 'components/BackLink/BackLink';
-import css from './MovieDetails.module.css';
+import { Suspense } from 'react';
 
-export const MovieDetails = ({ movieInfo }) => {
+import BackLink from 'components/BackLink/BackLink';
+import css from './MovieDetails.module.css';
+import Loader from 'components/Loader/Loader';
+
+import noBannerImg from '../../images/no_actor_pic.png';
+
+const MovieDetails = ({ movieInfo }) => {
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = location.state?.from ?? '/'; // или ?? '/movies';
 
   return (
     <main>
       <BackLink to={backLinkHref}>Go back</BackLink>
       <div className={css.wrapper}>
         <img
-          src={`https://image.tmdb.org/t/p/w300/${movieInfo.poster_path}`}
+          src={
+            movieInfo.poster_path
+              ? `https://image.tmdb.org/t/p/w300/${movieInfo.poster_path}`
+              : noBannerImg
+          }
           alt={movieInfo.title}
           loading="lazy"
         />
@@ -58,8 +68,27 @@ export const MovieDetails = ({ movieInfo }) => {
             </Link>
           </li>
         </ul>
-        <Outlet />
+
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </div>
     </main>
   );
 };
+
+MovieDetails.propTypes = {
+  movieInfo: PropTypes.objectOf(
+    PropTypes.shape({
+      poster_path: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      release_date: PropTypes.string.isRequired,
+      first_air_date: PropTypes.string.isRequired,
+      vote_average: PropTypes.number.isRequired,
+      overview: PropTypes.string.isRequired,
+      genres: PropTypes.array.isRequired,
+    })
+  ),
+};
+
+export default MovieDetails;

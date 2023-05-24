@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieReviews } from 'api/fetchMovieReviews';
-import { ReviewsList } from 'components/ReviewsList/ReviewsList';
+import fetchMovieReviews from 'api/fetchMovieReviews';
+import ReviewsList from 'components/ReviewsList/ReviewsList';
+import css from "./Reviews.module.css"
 
-export const Reviews = () => {
+const Reviews = () => {
   const { id } = useParams();
   const [reviewsList, setReviewsList] = useState(null);
 
@@ -14,7 +15,6 @@ export const Reviews = () => {
       try {
         const result = await fetchMovieReviews(id);
         const reviewsArr = result.data.results;
-        console.log('reviewsArr', reviewsArr);
         setReviewsList(reviewsArr);
       } catch (error) {
         console.log(error);
@@ -25,6 +25,10 @@ export const Reviews = () => {
   return reviewsList && reviewsList.length > 0 ? (
     <ReviewsList reviews={reviewsList} />
   ) : (
-    <p>There are no reviews for this movie yet...</p>
+    <p className={css.no_reviews_list}>
+      There are no reviews for this movie yet...
+    </p>
   );
 };
+
+export default Reviews;

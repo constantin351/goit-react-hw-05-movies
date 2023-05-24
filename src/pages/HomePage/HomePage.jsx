@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-import { fetchDayTrendingMovies } from 'api/fetchDayTrendingMovies';
-
-import { MoviesList } from 'components/MoviesList/MoviesList';
+import fetchDayTrendingMovies from 'api/fetchDayTrendingMovies';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
-  // const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchMovies();
@@ -16,13 +14,10 @@ const HomePage = () => {
         const moviesArr = result.data.results;
         setMovies(moviesArr);
       } catch (error) {
-        // setError(error);
-        console.log('error', error);
+        console.log(error);
       }
     }
   }, []);
-
-  // console.log('movies', movies);
 
   return <>{movies && <MoviesList movies={movies} />}</>;
 };

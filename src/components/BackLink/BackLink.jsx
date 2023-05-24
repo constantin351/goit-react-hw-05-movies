@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import css from './BackLink.module.css';
 
-export const BackLink = ({ to, children }) => {
+const BackLink = ({ to, children }) => {
   return (
     <Link to={to} className={css.backlink}>
       <BsFillArrowLeftCircleFill size="20" />
@@ -10,3 +11,10 @@ export const BackLink = ({ to, children }) => {
     </Link>
   );
 };
+
+BackLink.propTypes = {
+  to: PropTypes.object.isRequired,
+  children: PropTypes.node,
+};
+
+export default BackLink;

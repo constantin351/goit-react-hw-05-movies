@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 import noActorImg from '../../images/no_actor_pic.png';
-import css from "./ActorsList.module.css"
+import css from './ActorsList.module.css';
 
-export const ActorsList = ({ actorsListArr }) => {
+const ActorsList = ({ actorsListArr }) => {
   return (
     <div>
       <ul className={css.actorsList}>
@@ -17,11 +18,24 @@ export const ActorsList = ({ actorsListArr }) => {
               loading="lazy"
               className={css.actorsList_img}
             />
-            <h3>{actor.name}</h3>
-            <p>Character: {actor.character}</p>
+            <h3 className={css.actorsList_title}>{actor.name}</h3>
+            <p className={css.actorsList_text}>Character: {actor.character}</p>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
+ActorsList.propTypes = {
+  actorsListArr: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      profile_path: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      character: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+export default ActorsList;
